@@ -1,0 +1,117 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div id="tabs">
+  <dx-tabs #apiTabs [dataSource]="tabs" [selectedIndex]="0" (onItemClick)="selectTab($event)"></dx-tabs>
+  <!--div class="content dx-fieldset">
+    <div class="dx-field">
+      <div class="dx-field-label">Selected index:</div>
+      <div class="dx-field-value">
+        <dx-select-box [dataSource]="tabs" displayExpr="text" valueExpr="id" (onItemClick)="selectTab($event)" [(value)]="apiTabs.selectedIndex"></dx-select-box>
+      </div>
+    </div>
+    <div class="dx-field">
+      <div class="dx-field-label">Selected content:</div>
+      <div class="dx-field-value-static left-aligned">
+        {{tabContent}}
+      </div>
+    </div>
+  </div-->
+</div>
+<!--div style="display: inline" *ngFor='let item of sections'>
+  <input type="button" (click)="setCounter(item.buttonNum)" id={ {item.buttonNum}} value={{item.displayName}}>
+</div-->
+<br>
+<br>
+<!--input type="text" id="TEXT1" value={{tabId}}-->
+<!--input type="text" id="TEXT2" value=Предыдущий:{{textValue1}}-->
+<dx-data-grid *ngIf="2==textValue" id="gridContainer" [dataSource]="customers" [columns]="['CompanyName', 'City', 'State', 'Phone', 'Fax']">
+</dx-data-grid>
+
+<form *ngIf="1==textValue" action="your-action" (submit)="onFormSubmit($event)">
+  <dx-form id="form" [formData]="customer" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true" validationGroup="customerData">
+    <dxi-item itemType="group" caption="Credentials">
+      <dxi-item dataField="Login">
+        <dxi-validation-rule type="required" message="Login is required">
+        </dxi-validation-rule>
+      </dxi-item>
+      <dxi-item dataField="Password" [editorOptions]="{ mode: 'password' }">
+        <dxi-validation-rule type="required" message="Password is required">
+        </dxi-validation-rule>
+      </dxi-item>
+      <dxi-item editorType="dxTextBox" [editorOptions]="{ mode: 'password' }">
+        <dxo-label text="Confirm Password">
+        </dxo-label>
+        <dxi-validation-rule type="required" message="Confirm Password is required">
+        </dxi-validation-rule>
+        <dxi-validation-rule type="compare" [comparisonTarget]="passwordComparison" message="Password and Confirm Password do not match">
+        </dxi-validation-rule>
+      </dxi-item>
+    </dxi-item>
+    <dxi-item itemType="group" caption="Personal Data">
+      <dxi-item dataField="Name">
+        <dxi-validation-rule type="required" message="Name is required">
+        </dxi-validation-rule>
+        <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name">
+        </dxi-validation-rule>
+      </dxi-item>
+      <dxi-item dataField="Date" editorType="dxDateBox" [editorOptions]="{ 
+                  invalidDateMessage: 'The date must have the following format: MM/dd/yyyy' }">
+        <dxo-label text="Date of birth">
+        </dxo-label>
+        <dxi-validation-rule type="required" message="Date of birth is required">
+        </dxi-validation-rule>
+        <dxi-validation-rule type="range" [max]="maxDate" message="You must be at least 21 years old">
+        </dxi-validation-rule>
+      </dxi-item>
+    </dxi-item>
+    <dxi-item itemType="group" caption="Billing address">
+      <dxi-item dataField="Country" editorType="dxSelectBox" [editorOptions]="{ dataSource: countries }">
+        <dxi-validation-rule type="required" message="Country is required">
+        </dxi-validation-rule>
+      </dxi-item>
+      <dxi-item dataField="City">
+        <dxi-validation-rule type="pattern" [pattern]="cityPattern" message="Do not use digits in the City name">
+        </dxi-validation-rule>
+        <dxi-validation-rule type="stringLength" [min]="2" message="Name must have at least 2 symbols">
+        </dxi-validation-rule>
+        <dxi-validation-rule type="required" message="City is required">
+        </dxi-validation-rule>
+      </dxi-item>
+      <dxi-item dataField="Address">
+        <dxi-validation-rule type="required" message="Address is required">
+        </dxi-validation-rule>
+      </dxi-item>
+      <dxi-item dataField="Phone" helpText="Enter the phone number in USA phone format" [editorOptions]="{ 
+                  mask: '+1 (X00) 000-0000',
+                  maskRules: phoneRules,
+                  useMaskedValue: true,
+                  maskInvalidMessage: 'The phone must have a correct USA phone format'
+              }">
+        <dxi-validation-rule type="pattern" [pattern]="phonePattern" message="The phone must have a correct USA phone format">
+        </dxi-validation-rule>
+      </dxi-item>
+    </dxi-item>
+    <dxi-item itemType="simple" dataField="Accepted" editorType="dxCheckBox" [editorOptions]="{ 
+              text: 'I agree to the Terms and Conditions',
+              value: false
+          }">
+      <dxo-label [visible]="false">
+      </dxo-label>
+      <dxi-validation-rule type="compare" [comparisonTarget]="checkComparison" message="You must agree to the Terms and Conditions">
+      </dxi-validation-rule>
+    </dxi-item>
+  </dx-form>
+  <br />
+  <dx-button text="Register" type="success" validationGroup="customerData" [useSubmitBehavior]="true">
+  </dx-button>
+</form>
+
+<div *ngIf="0==textValue" class="form">
+  <dx-button id="progress-button" [(text)]="buttonText" (onClick)="onButtonClick()" [width]="200">
+  </dx-button>
+  <!--div class="progress-info">
+    Time left {{seconds | time}}
+  </div-->
+  <dx-progress-bar #progressBar id="progress-bar-status" width="90%" [class.complete]="progressBar.value == maxValue" [min]="0"
+    [max]="maxValue" [statusFormat]="format" [value]="maxValue - seconds">
+  </dx-progress-bar>
+</div>
